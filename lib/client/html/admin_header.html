@@ -1,0 +1,48 @@
+<template name="AdminHeader">
+    <header class="header">
+        <a href="/admin" class="logo">
+            {{#if AdminConfig.name}}
+              {{AdminConfig.name}}
+            {{else}}
+              {{_ "admin"}}
+            {{/if}}
+        </a>
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    <li>
+                        {{#if AdminConfig.dashboard.homeUrl}}
+                          <a href="{{AdminConfig.dashboard.homeUrl}}">{{_ 'home'}}</a>
+                        {{else}}
+                          <a href="/">{{_ 'home'}}</a>
+                        {{/if}}
+
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span>{{_ "adminUser"}} <i class="caret"></i></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="">
+                              <a href="{{pathFor 'adminDashboardUsersEdit' _id=currentUser._id}}">
+                                {{_ "yourProfile"}}
+                              </a>
+                            </li>
+                            <li class="">
+                                <a href="#" class="btn-sign-out">
+                                  {{_ "signOut"}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+</template>

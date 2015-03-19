@@ -1,0 +1,66 @@
+{
+  "admin": "Admin",
+  "adminUser": "Admin",
+  "home": "Home",
+  "yourProfile": "Your profile",
+  "signOut": "Sign out",
+  "dashboard": "Dashboard",
+  "new": "New",
+  "edit": "Edit",
+
+  "notAdmin": "You need to be an admin to view this page",
+  "noItems": "There are no visible items in this collection.",
+  "addOne": "Add one",
+
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "new": "New",
+    "viewAll": "View All"
+  },
+
+  "widgets": {
+    "viewAll": "View All",
+    "view": "View",
+    "createNew": "Create new",
+    "new": "new",
+    "Edit": "Edit",
+    "edit": "edit"
+  },
+
+  "btns": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Create",
+    "update": "Update"
+  },
+
+  "deleteModal": {
+    "confirm": "Confirm delete",
+    "question": "Are you sure you want to delete this?",
+    "delete": "Delete",
+    "close": "Close"
+  },
+
+  "user": {
+    "add": "Add User",
+    "pwd": "Password",
+    "mail": "Mail",
+    "email": "Email",
+    "emailAddress": "Email address",
+    "pwdByEmail": "Let this user choose their own password with an email",
+    "sendPwd": "Send this user their password by email",
+    "roles": "User Roles",
+    "joined": "Joined",
+    "toggleRole": "Click a role to toggle it.",
+    "noRoles": "User not in any roles. Click a role to add it to a user.",
+    "resetPwd": "Reset Password",
+    "sendEmail": "Send Email",
+    "sendResetEmailLabel": "Send a reset password email to",
+    "changePwd": "Change Password",
+    "users": "Users",
+    "createNew": "Create new user",
+    "new": "New",
+    "edit": "edit",
+    "editUser": "Edit user"
+  }
+}
