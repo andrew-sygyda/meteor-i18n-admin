@@ -43,7 +43,9 @@
 		{{/with}}
 	{{else}}
 		{{#if hasDocuments}}
-			{{> tabular table=admin_table class="table dataTable"}}
+			{{#if admin_table}}
+				{{> tabular table=admin_table class="table dataTable"}}
+			{{/if}}
 		{{else}}
 			<div class="alert alert-info">
 				<p>{{_ "noItems"}}</p>

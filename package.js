@@ -3,7 +3,7 @@
 Package.describe({
   name: 'ansyg:i18n-admin',
   summary: 'A complete admin dashboard i18n solution',
-  version: '0.1.1',
+  version: '0.1.2',
   git: 'https://github.com/andrew-sygyda/meteor-i18n-admin',
   documentation: 'README.md'
 });
@@ -19,13 +19,13 @@ Package.onUse(function (api) {
     'underscore',
     'tap:i18n@1.0.7',
     'aldeed:collection2@2.3.2',
-    'aldeed:autoform@5.0.0',
+    'aldeed:autoform@4.2.2',
     'aldeed:template-extension@3.1.1',
     'alanning:roles@1.2.13',
     'raix:handlebar-helpers@0.2.4',
     'reywood:publish-composite@1.3.5',
     'momentjs:moment@2.9.0',
-    'aldeed:tabular@1.0.6',
+    'aldeed:tabular@1.1.0',
     'meteorhacks:unblock@1.1.0'
   ], both);
 

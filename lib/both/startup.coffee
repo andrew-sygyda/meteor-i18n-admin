@@ -83,7 +83,7 @@ adminCreateTables = (collections) ->
 
 adminPublishTables = (collections) ->
 	_.each collections, (collection, name) ->
-		if not collection.children then return undefined
+		unless collection.children then return undefined
 		Meteor.publishComposite adminTablePubName(name), (tableName, ids, fields) ->
 			check tableName, String
 			check ids, Array
