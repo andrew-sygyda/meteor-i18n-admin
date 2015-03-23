@@ -102,7 +102,7 @@ tableSettings = ->
 
 Meteor.startup =>
 	if Meteor.isClient and AdminConfig?.lang and window.location.pathname.indexOf('/admin') >= 0
-		setLanguage AdminConfig.lang
+		TAPi18n.setLanguage AdminConfig.lang
 		.done ->
 			do setDataTableLang
 			do tableSettings
