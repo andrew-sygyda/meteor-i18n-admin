@@ -19,7 +19,7 @@ Package.onUse(function (api) {
     'coffeescript',
     'underscore',
     'aldeed:collection2@2.3.2',
-    'aldeed:autoform@4.2.2',
+    'aldeed:autoform@5.0.3',
     'aldeed:template-extension@3.1.1',
     'alanning:roles@1.2.13',
     'raix:handlebar-helpers@0.2.4',
