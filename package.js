@@ -3,7 +3,7 @@
 Package.describe({
   name: 'ansyg:i18n-admin',
   summary: 'A complete admin dashboard i18n solution',
-  version: '0.1.2',
+  version: '0.1.3',
   git: 'https://github.com/andrew-sygyda/meteor-i18n-admin',
   documentation: 'README.md'
 });
@@ -41,6 +41,7 @@ Package.onUse(function (api) {
   ], 'server');
 
   api.addFiles([
+    'package-tap.i18n',
     'lib/both/AdminDashboard.coffee',
     'lib/both/router.coffee',
     'lib/both/utils.coffee',

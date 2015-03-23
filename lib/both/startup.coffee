@@ -8,14 +8,14 @@ getI18nLabel = (label) ->
 adminEditDelButtons = ->
 	[
 		data: '_id'
-		title: getI18nLabel 'btns.update'
+		title: getI18nLabel 'admin.btns.update'
 		createdCell: (node, cellData, rowData) ->
 			$(node).html(Blaze.toHTMLWithData Template.adminEditBtn, {_id: cellData}, node)
 		width: '40px'
 		orderable: false
 	,
 		data: '_id'
-		title: getI18nLabel 'btns.delete'
+		title: getI18nLabel 'admin.btns.delete'
 		createdCell: (node, cellData, rowData) ->
 			$(node).html(Blaze.toHTMLWithData Template.adminDeleteBtn, {_id: cellData}, node)
 		width: '40px'
