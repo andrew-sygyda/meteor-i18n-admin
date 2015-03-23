@@ -48,7 +48,7 @@ UI.registerHelper 'admin_collection_items', ->
 UI.registerHelper 'admin_omit_fields', ->
 	if typeof AdminConfig.autoForm != 'undefined' and typeof AdminConfig?.autoForm?.omitFields == 'object'
 		global = AdminConfig.autoForm.omitFields
-	if not Session.equals('admin_collection_name','Users') and typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection_name'].omitFields == 'object'
+	if not Session.equals('admin_collection_name','Users') and AdminConfig?.collections?[Session.get 'admin_collection_name']?.omitFields == 'object'
 		collection = AdminConfig.collections?[Session.get 'admin_collection_name']?.omitFields?
 	if typeof global == 'object' and typeof collection == 'object'
 		_.union global, collection

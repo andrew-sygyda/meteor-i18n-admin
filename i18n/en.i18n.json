@@ -61,6 +61,7 @@
     "createNew": "Create new user",
     "new": "New",
     "edit": "edit",
-    "editUser": "Edit user"
+    "editUser": "Edit user",
+    "signIn": "Sign in"
   }
 }
