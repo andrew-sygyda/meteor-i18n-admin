@@ -3,7 +3,7 @@
 Package.describe({
   name: 'ansyg:i18n-admin',
   summary: 'A complete admin dashboard i18n solution',
-  version: '0.1.4',
+  version: '0.1.12',
   git: 'https://github.com/andrew-sygyda/meteor-i18n-admin',
   documentation: 'README.md'
 });
@@ -14,10 +14,10 @@ Package.onUse(function (api) {
   api.versionsFrom('METEOR@1.0');
 
   api.use([
+    'tap:i18n@1.4.1',
     'iron:router@1.0.7',
     'coffeescript',
     'underscore',
-    'tap:i18n@1.0.7',
     'aldeed:collection2@2.3.2',
     'aldeed:autoform@4.2.2',
     'aldeed:template-extension@3.1.1',
@@ -40,8 +40,9 @@ Package.onUse(function (api) {
     'email'
   ], 'server');
 
+  api.addFiles('package-tap.i18n', both);
+
   api.addFiles([
-    'package-tap.i18n',
     'lib/both/AdminDashboard.coffee',
     'lib/both/router.coffee',
     'lib/both/utils.coffee',
@@ -70,10 +71,10 @@ Package.onUse(function (api) {
     'lib/server/methods.coffee'
   ], 'server');
 
+  api.export('AdminDashboard', both);
+
   api.addFiles([
     'i18n/en.i18n.json',
     'i18n/ru.i18n.json'
   ], both);
-
-  api.export('AdminDashboard', both);
 });

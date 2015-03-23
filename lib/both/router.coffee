@@ -32,7 +32,7 @@ Router.route "adminDashboard",
 	action: ->
 		@render()
 	onAfterAction: ->
-		Session.set 'admin_title', TAPi18n.__ 'admin'
+		Session.set 'admin_title', __ 'admin'
 		Session.set 'admin_collection_name', ''
 		Session.set 'admin_collection_page', ''
 
@@ -43,9 +43,9 @@ Router.route "adminDashboardUsersNew",
 	action: ->
 		@render()
 	onAfterAction: ->
-		Session.set 'admin_title', TAPi18n.__ 'user.users'
-		Session.set 'admin_subtitle', TAPi18n.__ 'user.createNew'
-		Session.set 'admin_collection_page', TAPi18n.__ 'user.new'
+		Session.set 'admin_title', __ 'user.users'
+		Session.set 'admin_subtitle', __ 'user.createNew'
+		Session.set 'admin_collection_page', __ 'user.new'
 		Session.set 'admin_collection_name', 'Users'
 
 Router.route "adminDashboardUsersEdit",
@@ -59,9 +59,9 @@ Router.route "adminDashboardUsersEdit",
 	action: ->
 		@render()
 	onAfterAction: ->
-		Session.set 'admin_title', TAPi18n.__ 'user.users'
-		Session.set 'admin_subtitle', TAPi18n.__('user.editUser') + " #{@params._id}"
-		Session.set 'admin_collection_page', TAPi18n.__ 'user.edit'
+		Session.set 'admin_title', __ 'user.users'
+		Session.set 'admin_subtitle', __('user.editUser') + " #{@params._id}"
+		Session.set 'admin_collection_page', __ 'user.edit'
 		Session.set 'admin_collection_name', 'Users'
 		Session.set 'admin_id', @params._id
 		Session.set 'admin_doc', Meteor.users.findOne({_id:@params._id})
@@ -76,7 +76,7 @@ Router.route "adminDashboardView",
 		@render()
 	onAfterAction: ->
 		Session.set 'admin_title', AdminDashboard.collectionLabel @params.collection
-		Session.set 'admin_subtitle', TAPi18n.__ 'widgets.view'
+		Session.set 'admin_subtitle', __ 'widgets.view'
 		Session.set 'admin_collection_name', @params.collection
 
 Router.route "adminDashboardNew",
@@ -87,8 +87,8 @@ Router.route "adminDashboardNew",
 		@render()
 	onAfterAction: ->
 		Session.set 'admin_title', AdminDashboard.collectionLabel @params.collection
-		Session.set 'admin_subtitle', TAPi18n.__ 'widgets.createNew'
-		Session.set 'admin_collection_page', TAPi18n.__ 'widgets.new'
+		Session.set 'admin_subtitle', __ 'widgets.createNew'
+		Session.set 'admin_collection_page', __ 'widgets.new'
 		Session.set 'admin_collection_name', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
 	data: ->
 		admin_collection: adminCollectionObject @params.collection
@@ -103,8 +103,8 @@ Router.route "adminDashboardEdit",
 		@render()
 	onAfterAction: ->
 		Session.set 'admin_title', AdminDashboard.collectionLabel @params.collection
-		Session.set 'admin_subtitle', TAPi18n.__('widgets.Edit') + " #{@params._id}"
-		Session.set 'admin_collection_page', TAPi18n.__ 'widgets.edit'
+		Session.set 'admin_subtitle', __('widgets.Edit') + " #{@params._id}"
+		Session.set 'admin_collection_page', __ 'widgets.edit'
 		Session.set 'admin_collection_name', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
 		Session.set 'admin_id', @params._id
 		Session.set 'admin_doc', adminCollectionObject(@params.collection).findOne _id : @params._id

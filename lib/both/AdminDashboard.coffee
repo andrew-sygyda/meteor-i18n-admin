@@ -17,7 +17,7 @@ AdminDashboard =
 	adminRoutes: ['adminDashboard','adminDashboardUsersNew','adminDashboardUsersEdit','adminDashboardView','adminDashboardNew','adminDashboardEdit']
 	collectionLabel: (collection)->
 		if collection == 'Users'
-			TAPi18n.__ 'user.users'
+			__ 'user.users'
 		else if collection? and typeof AdminConfig.collections[collection].label == 'string'
 			AdminConfig.collections[collection].label
 		else Session.get 'admin_collection_name'
@@ -51,18 +51,18 @@ AdminDashboard =
 		AdminDashboard.schemas.newUser = new SimpleSchema
 			email:
 				type: String
-				label: TAPi18n.__ 'user.emailAddress'
+				label: __ 'user.emailAddress'
 			chooseOwnPassword:
 				type: Boolean
-				label: TAPi18n.__ 'user.pwdByEmail'
+				label: __ 'user.pwdByEmail'
 				defaultValue: true
 			password:
 				type: String
-				label: TAPi18n.__ 'user.pwd'
+				label: __ 'user.pwd'
 				optional: true
 			sendPassword:
 				type: Boolean
-				label: TAPi18n.__ 'user.sendPwd'
+				label: __ 'user.sendPwd'
 				optional: true
 
 		AdminDashboard.schemas.sendResetPasswordEmail = new SimpleSchema
@@ -74,4 +74,4 @@ AdminDashboard =
 				type: String
 			password:
 				type: String
-				label: TAPi18n.__ 'user.pwd'
+				label: __ 'user.pwd'

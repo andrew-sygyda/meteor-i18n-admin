@@ -3,7 +3,7 @@
 adminTablesDom = '<"box"<"box-header"<"box-toolbar"<"pull-left"<lf>><"pull-right"p>>><"box-body"t>>'
 
 getI18nLabel = (label) ->
-	if Meteor.isClient then TAPi18n.__ label else label
+	if Meteor.isClient then __ label else label
 
 adminEditDelButtons = ->
 	[
@@ -102,7 +102,7 @@ tableSettings = ->
 
 Meteor.startup =>
 	if Meteor.isClient and AdminConfig?.lang and window.location.pathname.indexOf('/admin') >= 0
-		TAPi18n.setLanguage AdminConfig.lang
+		setLanguage AdminConfig.lang
 		.done ->
 			do setDataTableLang
 			do tableSettings

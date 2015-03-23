@@ -1,10 +1,10 @@
 Template.registerHelper('AdminTables', AdminTables);
 
 Template.registerHelper 'labelCreateBtn', ->
-	TAPi18n.__ 'btns.create'
+	__ 'btns.create'
 
 Template.registerHelper 'labelUpdateBtn', ->
-	TAPi18n.__ 'btns.update'
+	__ 'btns.update'
 
 UI.registerHelper 'AdminConfig', ->
 	AdminConfig if AdminConfig?
@@ -15,7 +15,7 @@ UI.registerHelper 'admin_collections', ->
 		collections = AdminConfig.collections
 	collections.Users =
 		collectionObject: Meteor.users
-		label: TAPi18n.__ 'user.users'
+		label: __ 'user.users'
 		icon: 'user'
 
 	_.map collections, (obj, key) ->
