@@ -83,6 +83,8 @@ Router.route "adminDashboardNew",
   path: "/admin/:collection/new"
   template: "AdminDashboardNew"
   controller: "AdminController"
+  waitOn: ->
+    Meteor.subscribe 'adminAuxCollections', @params.collection
   action: ->
     @render()
   onAfterAction: ->
@@ -98,7 +100,10 @@ Router.route "adminDashboardEdit",
   template: "AdminDashboardEdit"
   controller: "AdminController"
   waitOn: ->
-    Meteor.subscribe('adminCollectionDoc', @params.collection, @params._id)
+    [
+      Meteor.subscribe 'adminCollectionDoc', @params.collection, @params._id
+      Meteor.subscribe 'adminAuxCollections', @params.collection
+    ]
   action: ->
     @render()
   onAfterAction: ->

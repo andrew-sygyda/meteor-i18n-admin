@@ -1,3 +1,16 @@
+Meteor.publish 'adminAuxCollections', (collection) ->
+  check collection, String
+  if Roles.userIsInRole @userId, [ 'admin' ]
+    if typeof AdminConfig?.collections?[collection]?.auxCollections is 'object'
+      subscriptions = []
+      _.each AdminConfig.collections[collection].auxCollections, (collection) ->
+        subscriptions.push adminCollectionObject(collection).find()
+      subscriptions
+    else
+      @ready()
+  else
+    @ready()
+
 Meteor.publish 'adminCollectionDoc', (collection, id) ->
   check collection, String
   check id, String
