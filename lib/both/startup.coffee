@@ -93,7 +93,7 @@ adminPublishTables = (collections) ->
 
       find: ->
         @unblock()
-        adminCollectionObject(name).find {}, {fields: fields}
+        adminCollectionObject(name).find {_id: {$in: ids}}, {fields: fields}
       children: collection.children
 
 tableSettings = ->
