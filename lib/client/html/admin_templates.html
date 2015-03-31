@@ -13,7 +13,17 @@
     {{> UI.dynamic template=name data=data }}
     {{/with}}
   {{else}}
-    {{> quickForm id="admin_insert" collection=admin_collection fields=admin_fields omitFields=admin_omit_fields buttonContent=labelCreateBtn template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" buttonClasses="btn-fixed btn btn-success"}}
+    {{> quickForm
+      id="admin_insert"
+      collection=admin_collection
+      fields=admin_fields
+      omitFields=admin_omit_fields
+      buttonContent=labelCreateBtn
+      template="bootstrap3-horizontal"
+      label-class="col-sm-2"
+      input-col-class="col-sm-10"
+      buttonClasses="btn-fixed btn btn-success"
+    }}
   {{/if}}
 </template>
 
@@ -25,7 +35,18 @@
     {{/with}}
   {{else}}
     {{#if admin_current_doc}}
-      {{> quickForm id="admin_update" collection=admin_collection doc=admin_current_doc fields=admin_fields omitFields=admin_omit_fields buttonContent=labelUpdateBtn template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" buttonClasses="btn-fixed btn btn-success"}}
+      {{> quickForm
+        id="admin_update"
+        collection=admin_collection
+        doc=admin_current_doc
+        fields=admin_fields
+        omitFields=admin_omit_fields
+        buttonContent=labelUpdateBtn
+        template="bootstrap3-horizontal"
+        label-class="col-sm-2"
+        input-col-class="col-sm-10"
+        buttonClasses="btn-fixed btn btn-success"
+      }}
     {{/if}}
   {{/if}}
 </template>

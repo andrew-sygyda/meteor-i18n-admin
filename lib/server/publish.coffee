@@ -4,7 +4,16 @@ Meteor.publish 'adminAuxCollections', (collection) ->
     if typeof AdminConfig?.collections?[collection]?.auxCollections is 'object'
       subscriptions = []
       _.each AdminConfig.collections[collection].auxCollections, (collection) ->
-        subscriptions.push adminCollectionObject(collection).find()
+        if typeof collection is 'string'
+          subscriptions.push adminCollectionObject(collection).find()
+        if typeof collection is 'object'
+          pattern =
+            collection: String
+            fields: Object
+          check collection, pattern
+          collection.fields._id = 1 unless collection.fields._id
+          subscriptions.push adminCollectionObject(collection.collection).find {},
+            fields: collection.fields
       subscriptions
     else
       @ready()

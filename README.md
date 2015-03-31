@@ -14,3 +14,23 @@ This package add lang field to AdminConfig object.
 ```
 
 Curently added `'ru'` and `'en'` support.
+
+In version 0.1.15 added `auxCollections` option, you can define it like:
+
+```CoffeeScript
+@AdminConfig =
+  # ...
+  collections:
+    Staff:
+      auxCollections: [
+        'SomeCollection',
+      ,
+      # or you can provide object with collection name and fields options,
+      # to specify wich fields you will be subscribed when add or edit document
+        collection: 'CollectionName'
+        fields:
+          _id: 1
+          name: 1
+          date: 1
+      ]
+```
