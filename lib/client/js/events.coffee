@@ -1,7 +1,7 @@
 Template.AdminLayout.events
   'click .btn-delete': (e, t) ->
     _id = $(e.target).attr 'doc'
-    collection = $(e.target).data 'collection'
+    collection = $(e.currentTarget).data 'collection'
     if collection
       Session.set 'admin_collection_name', collection
     Session.set 'admin_id', _id

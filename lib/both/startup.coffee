@@ -72,7 +72,7 @@ adminCreateTables = (collections) ->
     if columns.length == 0
       columns = []
 
-    AdminTables[name] = new Tabular.Table
+    table =
       name: name
       collection: adminCollectionObject(name)
       pub: collection.children and adminTablePubName(name)
@@ -80,6 +80,11 @@ adminCreateTables = (collections) ->
       columns: _.union columns, editDelBtns
       extraFields: collection.extraFields
       dom: adminTablesDom
+
+    if collection.order
+      table.order = collection.order
+
+    AdminTables[name] = new Tabular.Table table
 
 adminPublishTables = (collections) ->
   _.each collections, (collection, name) ->

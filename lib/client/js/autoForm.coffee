@@ -21,15 +21,12 @@ AutoForm.hooks
         if e
           hook.done(e)
         else
-          adminCallback 'onInsert', [Session.get 'admin_collection_name', insertDoc, updateDoc, currentDoc], (collection) ->
+          adminCallback 'onInsert', [Session.get('admin_collection_name'), insertDoc, updateDoc, currentDoc], (collection) ->
             hook.done null, collection
       return false
     onSuccess: (formType, collection)->
       AdminDashboard.alertSuccess 'Successfully created'
-      if AdminConfig?.collections?[collection]?.formRedirect
-        Router.go "#{AdminConfig.collections[collection].formRedirect}"
-      else
-        Router.go "/admin/#{collection}"
+      Router.go "/admin/#{collection}"
 
   admin_update:
     onSubmit: (insertDoc, updateDoc, currentDoc)->
@@ -38,7 +35,7 @@ AutoForm.hooks
         if e
           hook.done(e)
         else
-          adminCallback 'onUpdate', [Session.get 'admin_collection_name', insertDoc, updateDoc, currentDoc], (collection) ->
+          adminCallback 'onUpdate', [Session.get('admin_collection_name'), insertDoc, updateDoc, currentDoc], (collection) ->
             hook.done null, collection
       return false
     onSuccess: (formType, collection)->
