@@ -59,12 +59,13 @@ Router.route "adminDashboardUsersEdit",
   action: ->
     @render()
   onAfterAction: ->
+    user = Meteor.users.findOne _id: @params._id
     Session.set 'admin_title', __ 'user.users'
-    Session.set 'admin_subtitle', __('user.editUser') + " #{@params._id}"
+    Session.set 'admin_subtitle', __('user.editUser') + " #{user.username or @params._id}"
     Session.set 'admin_collection_page', __ 'user.edit'
     Session.set 'admin_collection_name', 'Users'
     Session.set 'admin_id', @params._id
-    Session.set 'admin_doc', Meteor.users.findOne({_id:@params._id})
+    Session.set 'admin_doc', user
 
 Router.route "adminDashboardView",
   path: "/admin/:collection"
@@ -107,11 +108,12 @@ Router.route "adminDashboardEdit",
   action: ->
     @render()
   onAfterAction: ->
+    doc = adminCollectionObject(@params.collection).findOne _id : @params._id
     Session.set 'admin_title', AdminDashboard.collectionLabel @params.collection
-    Session.set 'admin_subtitle', __('widgets.Edit') + " #{@params._id}"
+    Session.set 'admin_subtitle', __('widgets.Edit') + " #{doc and (doc.name or doc.title or doc.firstName) or @params._id}"
     Session.set 'admin_collection_page', __ 'widgets.edit'
     Session.set 'admin_collection_name', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
     Session.set 'admin_id', @params._id
-    Session.set 'admin_doc', adminCollectionObject(@params.collection).findOne _id : @params._id
+    Session.set 'admin_doc', doc
   data: ->
     admin_collection: adminCollectionObject @params.collection

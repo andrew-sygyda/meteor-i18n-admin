@@ -13,11 +13,11 @@ UI.registerHelper 'admin_collections', ->
   collections = {}
   if AdminConfig? and typeof AdminConfig.collections is 'object'
     collections = AdminConfig.collections
-  collections.Users =
+  collections.Users = {} if not collections?.Users or typeof collections.Users isnt 'object'
+  _.defaults collections.Users,
     collectionObject: Meteor.users
     label: __ 'user.users'
     icon: 'user'
-
   _.map collections, (obj, key) ->
     obj = _.extend obj, {name:key}
     obj = _.defaults obj, {label: key,icon:'plus',color:'blue'}
