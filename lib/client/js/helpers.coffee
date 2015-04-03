@@ -35,7 +35,7 @@ UI.registerHelper 'admin_is_users_collection', ->
   Session.get('admin_collection_name') == 'Users'
 
 UI.registerHelper 'admin_sidebar_items', ->
-  AdminDashboard.sidebarItems
+  AdminDashboard.sidebarItems.get()
 
 UI.registerHelper 'admin_collection_items', ->
   items = []

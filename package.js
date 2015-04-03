@@ -26,7 +26,8 @@ Package.onUse(function (api) {
     'reywood:publish-composite@1.3.5',
     'momentjs:moment@2.9.0',
     'aldeed:tabular@1.1.0',
-    'meteorhacks:unblock@1.1.0'
+    'meteorhacks:unblock@1.1.0',
+    'reactive-var'
   ], both);
 
   api.use([

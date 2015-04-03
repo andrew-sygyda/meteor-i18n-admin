@@ -1,6 +1,6 @@
 AdminDashboard =
   schemas: {}
-  sidebarItems: []
+  sidebarItems: new ReactiveVar []
   collectionItems: []
   alertSuccess: (message)->
     Session.set 'adminSuccess', message
@@ -30,12 +30,14 @@ AdminDashboard =
       item.url = url
       item.options = options
 
-    @sidebarItems.push item
+    arr = do @sidebarItems.get
+    arr.push item
+    @sidebarItems.set arr
 
   extendSidebarItem: (title, urls) ->
     if _.isObject(urls) then urls = [urls]
 
-    existing = _.find @sidebarItems, (item) -> item.title == title
+    existing = _.find @sidebarItems.get(), (item) -> item.title == title
     if existing
       existing.options.urls = _.union existing.options.urls, urls
 
