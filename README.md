@@ -34,3 +34,7 @@ In version 0.1.15 added `auxCollections` option, you can define it like:
           date: 1
       ]
 ```
+
+### NOTE!
+
+In your project folder must be files with translations such as `ru.i18n.js` and `en.i18n.js`. From package TAPi18n.
