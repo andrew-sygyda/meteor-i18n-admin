@@ -31,7 +31,7 @@
 
               </ol>
               {{#if $.Session.get 'admin_collection_name'}}
-              <a href="{{pathFor 'adminDashboardNew' collection=admin_collection_name}}" class="new-document"><i class="fa fa-plus"></i></a>
+              <a href="{{pathFor 'adminDashboardNew' collection=admin_collection_name}}" class="new-document btn btn-primary btn-sm"><i class="fa fa-plus" style="vertical-align:text-bottom;"></i> {{_ 'addOne'}}</a>
               {{/if}}
             </div>
           </section>
