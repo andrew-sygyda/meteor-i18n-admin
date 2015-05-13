@@ -75,6 +75,7 @@ Package.onUse(function (api) {
 
   api.addFiles([
     'i18n/en.i18n.json',
-    'i18n/ru.i18n.json'
+    'i18n/ru.i18n.json',
+    'i18n/zh-CN.i18n.json'
   ], both);
 });
