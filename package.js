@@ -1,7 +1,7 @@
 'use strict';
 
 Package.describe({
-  name: 'ansyg:i18n-admin',
+  name: 'admin-i18n',
   summary: 'A complete admin dashboard i18n solution',
   version: '0.1.17',
   git: 'https://github.com/andrew-sygyda/meteor-i18n-admin',
@@ -75,6 +75,7 @@ Package.onUse(function (api) {
 
   api.addFiles([
     'i18n/en.i18n.json',
-    'i18n/ru.i18n.json'
+    'i18n/ru.i18n.json',
+    'i18n/zh-CN.i18n.json'
   ], both);
 });
