@@ -6,7 +6,7 @@ Template.registerHelper 'labelCreateBtn', ->
 Template.registerHelper 'labelUpdateBtn', ->
 	__ 'btns.update'
 
-UI.registerHelper 'AdminConfig', ->
+Template.registerHelper 'AdminConfig', ->
 	AdminConfig if AdminConfig?
 
 adminCollections = ->
@@ -25,24 +25,24 @@ adminCollections = ->
 		obj = _.defaults obj, {label: key,icon:'plus',color:'blue'}
 
 
-UI.registerHelper 'admin_collections', adminCollections
+Template.registerHelper 'admin_collections', adminCollections
 
-UI.registerHelper 'admin_collection_name', ->
+Template.registerHelper 'admin_collection_name', ->
 	Session.get 'admin_collection_name'
 
-UI.registerHelper 'admin_current_id', ->
+Template.registerHelper 'admin_current_id', ->
 	Session.get 'admin_id'
 
-UI.registerHelper 'admin_current_doc', ->
+Template.registerHelper 'admin_current_doc', ->
 	Session.get 'admin_doc'
 
-UI.registerHelper 'admin_is_users_collection', ->
+Template.registerHelper 'admin_is_users_collection', ->
 	Session.get('admin_collection_name') == 'Users'
 
-UI.registerHelper 'admin_sidebar_items', ->
+Template.registerHelper 'admin_sidebar_items', ->
 	AdminDashboard.sidebarItems.get()
 
-UI.registerHelper 'admin_collection_items', ->
+Template.registerHelper 'admin_collection_items', ->
 	items = []
 	_.each AdminDashboard.collectionItems, (fn) =>
 		item = fn @name, '/admin/' + @name
@@ -50,7 +50,7 @@ UI.registerHelper 'admin_collection_items', ->
 			items.push item
 	items
 
-UI.registerHelper 'admin_omit_fields', ->
+Template.registerHelper 'admin_omit_fields', ->
 	if typeof AdminConfig.autoForm != 'undefined' and typeof AdminConfig?.autoForm?.omitFields == 'object'
 		global = AdminConfig.autoForm.omitFields
 	if not Session.equals('admin_collection_name','Users') and typeof AdminConfig != 'undefined' and AdminConfig?.collections?[Session.get 'admin_collection_name']?.omitFields == 'object'
@@ -62,25 +62,25 @@ UI.registerHelper 'admin_omit_fields', ->
 	else if typeof collection == 'object'
 		collection
 
-UI.registerHelper 'AdminSchemas', ->
+Template.registerHelper 'AdminSchemas', ->
 	AdminDashboard.schemas
 
-UI.registerHelper 'adminGetSkin', ->
+Template.registerHelper 'adminGetSkin', ->
 	if typeof AdminConfig.dashboard != 'undefined' and typeof AdminConfig.dashboard.skin == 'string'
 		AdminConfig.dashboard.skin
 	else
 		'blue'
 
-UI.registerHelper 'adminIsUserInRole', (_id,role)->
+Template.registerHelper 'adminIsUserInRole', (_id,role)->
 	Roles.userIsInRole _id, role
 
-UI.registerHelper 'adminGetUsers', ->
+Template.registerHelper 'adminGetUsers', ->
 	Meteor.users
 
-UI.registerHelper 'adminUserSchemaExists', ->
+Template.registerHelper 'adminUserSchemaExists', ->
 	typeof Meteor.users._c2 == 'object'
 
-UI.registerHelper 'adminGetUserSchema', ->
+Template.registerHelper 'adminGetUserSchema', ->
 	if _.has(AdminConfig, 'userSchema')
 		schema = AdminConfig.userSchema
 	else if typeof Meteor.users._c2 == 'object'
@@ -88,27 +88,27 @@ UI.registerHelper 'adminGetUserSchema', ->
 
 	return schema
 
-UI.registerHelper 'adminCollectionLabel', (collection)->
+Template.registerHelper 'adminCollectionLabel', (collection)->
 	AdminDashboard.collectionLabel(collection) if collection?
 
-UI.registerHelper 'adminCollectionCount', (collection)->
+Template.registerHelper 'adminCollectionCount', (collection)->
 	if collection == 'Users'
 		Meteor.users.find().count()
 	else
 		AdminCollectionsCount.findOne({collection: collection})?.count
 
-UI.registerHelper 'adminTemplate', (collection,mode)->
+Template.registerHelper 'adminTemplate', (collection,mode)->
 	if collection.toLowerCase() != 'users' && AdminConfig.collections?[collection]?.templates?
 		AdminConfig.collections[collection].templates[mode]
 
-UI.registerHelper 'adminGetCollection', (collection)->
+Template.registerHelper 'adminGetCollection', (collection)->
 	_.find adminCollections(), (item) -> item.name == collection
 
-UI.registerHelper 'adminWidgets', ->
+Template.registerHelper 'adminWidgets', ->
 	if typeof AdminConfig.dashboard != 'undefined' and typeof AdminConfig.dashboard.widgets != 'undefined'
 		AdminConfig.dashboard.widgets
 
-UI.registerHelper 'adminUserEmail', (user) ->
+Template.registerHelper 'adminUserEmail', (user) ->
 	if user && user.emails && user.emails[0] && user.emails[0].address
 		user.emails[0].address
 	else if user && user.services && user.services.facebook && user.services.facebook.email

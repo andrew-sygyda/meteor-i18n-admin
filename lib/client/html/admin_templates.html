@@ -1,6 +1,6 @@
 <template name="AdminDashboard">
 	{{#each adminWidgets}}
-	{{> UI.dynamic template=template data=data}}
+	{{> Template.dynamic template=template data=data}}
 	{{else}}
 	{{> adminDefaultWidgets}}
 	{{/each}}
@@ -10,7 +10,7 @@
 	{{> adminAlert}}
 	{{#if adminTemplate admin_collection_name 'new'}}
 		{{#with adminTemplate admin_collection_name 'new'}}
-		{{> UI.dynamic template=name data=data }}
+		{{> Template.dynamic template=name data=data }}
 		{{/with}}
 	{{else}}
 		{{> quickForm
@@ -31,7 +31,7 @@
 	{{> adminAlert}}
 	{{#if adminTemplate admin_collection_name 'edit'}}
 		{{#with adminTemplate admin_collection_name 'edit'}}
-		{{> UI.dynamic template=name data=data }}
+		{{> Template.dynamic template=name data=data }}
 		{{/with}}
 	{{else}}
 		{{#if admin_current_doc}}
@@ -60,7 +60,7 @@
 	{{> adminAlert}}
 	{{#if adminTemplate admin_collection_name 'view'}}
 		{{#with adminTemplate admin_collection_name 'view'}}
-		{{> UI.dynamic template=name data=data }}
+		{{> Template.dynamic template=name data=data }}
 		{{/with}}
 	{{else}}
 		{{#if hasDocuments}}

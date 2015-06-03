@@ -1,19 +1,20 @@
-Template.AdminDashboardViewWrapper.rendered = ->
+Template.AdminDashboardViewWrapper.onRendered ->
 	node = @firstNode
 
 	@autorun ->
 		data = Template.currentData()
 
 		if data.view then Blaze.remove data.view
+
 		while node.firstChild
 			node.removeChild node.firstChild
 
 		data.view = Blaze.renderWithData Template.AdminDashboardView, data, node
 
-Template.AdminDashboardViewWrapper.destroyed = ->
+Template.AdminDashboardViewWrapper.onDestroyed ->
 	Blaze.remove @data.view
 
-Template.AdminDashboardView.rendered = ->
+Template.AdminDashboardView.onRendered ->
 	table = @$('.dataTable').DataTable();
 	filter = @$('.dataTables_filter')
 	length = @$('.dataTables_length')
