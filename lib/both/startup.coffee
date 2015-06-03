@@ -38,7 +38,7 @@ adminCreateUserTable = ->
 				data: 'emails'
 				title: getI18nLabel 'user.email'
 				render: (value) ->
-					value[0].address
+					value?[0]?.address or ''
 			,
 				data: 'emails'
 				title: getI18nLabel 'user.mail'
@@ -60,10 +60,16 @@ adminCreateTables = (collections) ->
 	editDelBtns = do adminEditDelButtons
 	_.each AdminConfig?.collections, (collection, name) ->
 		return false if name is 'Users'
+
+		_.defaults collection, {
+			showEditColumn: true
+			showDelColumn: true
+		}
+
 		columns = _.map collection.tableColumns, (column) ->
 			if column.template
 				createdCell = (node, cellData, rowData) ->
-					$(node).html(Blaze.toHTMLWithData Template[column.template], {value: cellData, doc: rowData}, node)
+					Blaze.renderWithData(Template[column.template], {value: cellData, doc: rowData}, node)
 
 			data: column.name
 			title: column.label

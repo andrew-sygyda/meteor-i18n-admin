@@ -37,7 +37,7 @@ Meteor.methods
 				user.email = email
 				unless doc.chooseOwnPassword
 					user.password = doc.password
-					
+
 				_id = Accounts.createUser user
 
 				if doc.sendPassword && typeof AdminConfig.fromEmail != 'undefined'
@@ -72,18 +72,19 @@ Meteor.methods
 
 	adminCheckAdmin: ->
 		check arguments, [Match.Any]
-		if this.userId and !Roles.userIsInRole this.userId, ['admin']
-			email = Meteor.users.findOne(_id:this.userId).emails[0].address
+		user = Meteor.users.findOne(_id:this.userId)
+		if this.userId and !Roles.userIsInRole(this.userId, ['admin']) and (user.emails.length > 0)
+			email = user.emails[0].address
 			if typeof Meteor.settings.adminEmails != 'undefined'
 				adminEmails = Meteor.settings.adminEmails
 				if adminEmails.indexOf(email) > -1
 					console.log 'Adding admin user: ' + email
-					Roles.addUsersToRoles this.userId, ['admin']
+					Roles.addUsersToRoles this.userId, ['admin'], Roles.GLOBAL_GROUP
 			else if typeof AdminConfig != 'undefined' and typeof AdminConfig.adminEmails == 'object'
 				adminEmails = AdminConfig.adminEmails
 				if adminEmails.indexOf(email) > -1
 					console.log 'Adding admin user: ' + email
-					Roles.addUsersToRoles this.userId, ['admin']
+					Roles.addUsersToRoles this.userId, ['admin'], Roles.GLOBAL_GROUP
 			else if this.userId == Meteor.users.findOne({},{sort:{createdAt:1}})._id
 				console.log 'Making first user admin: ' + email
 				Roles.addUsersToRoles this.userId, ['admin']
@@ -91,7 +92,7 @@ Meteor.methods
 	adminAddUserToRole: (_id,role)->
 		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, ['admin']
-			Roles.addUsersToRoles _id, role
+			Roles.addUsersToRoles _id, role, Roles.GLOBAL_GROUP
 
 	adminRemoveUserToRole: (_id,role)->
 		check arguments, [Match.Any]

@@ -16,17 +16,17 @@ Package.onUse(function (api) {
 	api.use([
 		'tap:i18n@1.4.1',
 		'iron:router@1.0.7',
-		'coffeescript',
-		'underscore',
-		'aldeed:collection2@2.3.2',
-		'aldeed:autoform@5.0.3',
-		'aldeed:template-extension@3.1.1',
-		'alanning:roles@1.2.13',
-		'raix:handlebar-helpers@0.2.4',
-		'reywood:publish-composite@1.3.5',
-		'momentjs:moment@2.9.0',
-		'aldeed:tabular@1.1.0',
-		'meteorhacks:unblock@1.1.0',
+    'coffeescript',
+    'underscore',
+    'aldeed:collection2@2.3.3',
+    'aldeed:autoform@4.2.2 || 5.1.2',
+    'aldeed:template-extension@3.4.3',
+    'alanning:roles@1.2.13',
+    'raix:handlebar-helpers@0.2.4',
+    'reywood:publish-composite@1.3.6',
+    'momentjs:moment@2.10.3',
+    'aldeed:tabular@1.2.0',
+    'meteorhacks:unblock@1.1.0',
 		'reactive-var'
 	], both);
 

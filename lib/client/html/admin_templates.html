@@ -99,7 +99,7 @@
 <template name="AdminDashboardUsersEdit">
 	{{> adminAlert}}
 	{{#if adminUserSchemaExists}}
-	{{> quickForm id="adminUpdateUser" buttonContent=labelUpdateBtn buttonClasses="btn btn-primary btn-sm" collection=adminGetUsers doc=admin_current_doc omitFields="roles,services"}}
+	{{> quickForm id="adminUpdateUser" buttonContent=labelUpdateBtn buttonClasses="btn btn-primary btn-sm" collection=adminGetUsers schema=adminGetUserSchema doc=admin_current_doc omitFields="roles,services"}}
 	<hr/>
 	{{/if}}
 

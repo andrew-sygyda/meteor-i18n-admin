@@ -30,8 +30,8 @@ AdminDashboard =
 			item.url = url
 			item.options = options
 
-		arr = do @sidebarItems.get
-		arr.push item
+		arr = @sidebarItems.get()
+		((_.isArray arr) and arr or (arr = [])).push item
 		@sidebarItems.set arr
 
 	extendSidebarItem: (title, urls) ->

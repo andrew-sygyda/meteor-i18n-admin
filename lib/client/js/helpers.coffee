@@ -9,18 +9,23 @@ Template.registerHelper 'labelUpdateBtn', ->
 UI.registerHelper 'AdminConfig', ->
 	AdminConfig if AdminConfig?
 
-UI.registerHelper 'admin_collections', ->
+adminCollections = ->
 	collections = {}
-	if AdminConfig? and typeof AdminConfig.collections is 'object'
+
+	if typeof AdminConfig != 'undefined'  and typeof AdminConfig.collections == 'object'
 		collections = AdminConfig.collections
-	collections.Users = {} if not collections?.Users or typeof collections.Users isnt 'object'
-	_.defaults collections.Users,
+
+	collections.Users =
 		collectionObject: Meteor.users
-		label: __ 'user.users'
 		icon: 'user'
+		label: __ 'user.users'
+
 	_.map collections, (obj, key) ->
 		obj = _.extend obj, {name:key}
 		obj = _.defaults obj, {label: key,icon:'plus',color:'blue'}
+
+
+UI.registerHelper 'admin_collections', adminCollections
 
 UI.registerHelper 'admin_collection_name', ->
 	Session.get 'admin_collection_name'
@@ -48,7 +53,7 @@ UI.registerHelper 'admin_collection_items', ->
 UI.registerHelper 'admin_omit_fields', ->
 	if typeof AdminConfig.autoForm != 'undefined' and typeof AdminConfig?.autoForm?.omitFields == 'object'
 		global = AdminConfig.autoForm.omitFields
-	if not Session.equals('admin_collection_name','Users') and AdminConfig?.collections?[Session.get 'admin_collection_name']?.omitFields == 'object'
+	if not Session.equals('admin_collection_name','Users') and typeof AdminConfig != 'undefined' and AdminConfig?.collections?[Session.get 'admin_collection_name']?.omitFields == 'object'
 		collection = AdminConfig.collections?[Session.get 'admin_collection_name']?.omitFields?
 	if typeof global == 'object' and typeof collection == 'object'
 		_.union global, collection
@@ -75,12 +80,20 @@ UI.registerHelper 'adminGetUsers', ->
 UI.registerHelper 'adminUserSchemaExists', ->
 	typeof Meteor.users._c2 == 'object'
 
+UI.registerHelper 'adminGetUserSchema', ->
+	if _.has(AdminConfig, 'userSchema')
+		schema = AdminConfig.userSchema
+	else if typeof Meteor.users._c2 == 'object'
+		schema = Meteor.users.simpleSchema()
+
+	return schema
+
 UI.registerHelper 'adminCollectionLabel', (collection)->
 	AdminDashboard.collectionLabel(collection) if collection?
 
 UI.registerHelper 'adminCollectionCount', (collection)->
 	if collection == 'Users'
-		Meteor.users.find().fetch().length
+		Meteor.users.find().count()
 	else
 		AdminCollectionsCount.findOne({collection: collection})?.count
 
@@ -89,7 +102,7 @@ UI.registerHelper 'adminTemplate', (collection,mode)->
 		AdminConfig.collections[collection].templates[mode]
 
 UI.registerHelper 'adminGetCollection', (collection)->
-	AdminConfig.collections[collection]
+	_.find adminCollections(), (item) -> item.name == collection
 
 UI.registerHelper 'adminWidgets', ->
 	if typeof AdminConfig.dashboard != 'undefined' and typeof AdminConfig.dashboard.widgets != 'undefined'
