@@ -3,7 +3,7 @@
 Package.describe({
 	name: 'admin-i18n',
 	summary: 'A complete admin dashboard i18n solution',
-	version: '0.1.18',
+	version: '0.1.19',
 	git: 'https://github.com/andrew-sygyda/meteor-i18n-admin',
 	documentation: 'README.md'
 });
