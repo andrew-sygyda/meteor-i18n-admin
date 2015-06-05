@@ -26,7 +26,7 @@ AutoForm.hooks
 			return false
 		onSuccess: (formType, collection)->
 			AdminDashboard.alertSuccess 'Successfully created'
-			Router.go "/admin/#{collection}"
+			Router.go "/admin/#{Session.get 'admin_collection_name'}"
 
 	admin_update:
 		onSubmit: (insertDoc, updateDoc, currentDoc)->
@@ -43,7 +43,7 @@ AutoForm.hooks
 			if AdminConfig?.collections?[collection]?.formRedirect
 				Router.go "#{AdminConfig.collections[collection].formRedirect}"
 			else
-				Router.go "/admin/#{collection}"
+				Router.go "/admin/#{Session.get 'admin_collection_name'}"
 
 	adminNewUser:
 		onSuccess: (formType, result)->

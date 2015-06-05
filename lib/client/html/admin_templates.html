@@ -15,6 +15,7 @@
 	{{else}}
 		{{> quickForm
 			id="admin_insert"
+			type="insert"
 			collection=admin_collection
 			fields=admin_fields
 			omitFields=admin_omit_fields
@@ -37,6 +38,7 @@
 		{{#if admin_current_doc}}
 			{{> quickForm
 				id="admin_update"
+				type="update"
 				collection=admin_collection
 				doc=admin_current_doc
 				fields=admin_fields
