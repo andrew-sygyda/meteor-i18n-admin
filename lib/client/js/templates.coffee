@@ -1,49 +1,50 @@
-Template.AdminDashboardViewWrapper.rendered = ->
-  node = @firstNode
+Template.AdminDashboardViewWrapper.onRendered ->
+	node = @firstNode
 
-  @autorun ->
-    data = Template.currentData()
+	@autorun ->
+		data = Template.currentData()
 
-    if data.view then Blaze.remove data.view
-    while node.firstChild
-      node.removeChild node.firstChild
+		if data.view then Blaze.remove data.view
 
-    data.view = Blaze.renderWithData Template.AdminDashboardView, data, node
+		while node.firstChild
+			node.removeChild node.firstChild
 
-Template.AdminDashboardViewWrapper.destroyed = ->
-  Blaze.remove @data.view
+		data.view = Blaze.renderWithData Template.AdminDashboardView, data, node
 
-Template.AdminDashboardView.rendered = ->
-  table = @$('.dataTable').DataTable();
-  filter = @$('.dataTables_filter')
-  length = @$('.dataTables_length')
+Template.AdminDashboardViewWrapper.onDestroyed ->
+	Blaze.remove @data.view
 
-  filter.html '
-    <div class="input-group">
-      <input type="search" class="form-control input-sm" placeholder="Search"></input>
-      <div class="input-group-btn">
-        <button class="btn btn-sm btn-default">
-          <i class="fa fa-search"></i>
-        </button>
-      </div>
-    </div>
-  '
+Template.AdminDashboardView.onRendered ->
+	table = @$('.dataTable').DataTable();
+	filter = @$('.dataTables_filter')
+	length = @$('.dataTables_length')
 
-  length.html '
-    <select class="form-control input-sm">
-      <option value="10">10</option>
-      <option value="25">25</option>
-      <option value="50">50</option>
-      <option value="100">100</option>
-    </select>
-  '
+	filter.html '
+		<div class="input-group">
+			<input type="search" class="form-control input-sm" placeholder="Search"></input>
+			<div class="input-group-btn">
+				<button class="btn btn-sm btn-default">
+					<i class="fa fa-search"></i>
+				</button>
+			</div>
+		</div>
+	'
 
-  filter.find('input').on 'keyup', ->
-    table.search(@value).draw()
+	length.html '
+		<select class="form-control input-sm">
+			<option value="10">10</option>
+			<option value="25">25</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+		</select>
+	'
 
-  length.find('select').on 'change', ->
-    table.page.len(parseInt @value).draw()
+	filter.find('input').on 'keyup', ->
+		table.search(@value).draw()
+
+	length.find('select').on 'change', ->
+		table.page.len(parseInt @value).draw()
 
 Template.AdminDashboardView.helpers
-  hasDocuments: ->
-    AdminCollectionsCount.findOne({collection: Session.get 'admin_collection_name'})?.count > 0
+	hasDocuments: ->
+		AdminCollectionsCount.findOne({collection: Session.get 'admin_collection_name'})?.count > 0

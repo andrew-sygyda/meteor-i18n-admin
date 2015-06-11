@@ -1,174 +1,176 @@
 <template name="AdminDashboard">
-  {{#each adminWidgets}}
-  {{> UI.dynamic template=template data=data}}
-  {{else}}
-  {{> adminDefaultWidgets}}
-  {{/each}}
+	{{#each adminWidgets}}
+	{{> Template.dynamic template=template data=data}}
+	{{else}}
+	{{> adminDefaultWidgets}}
+	{{/each}}
 </template>
 
 <template name="AdminDashboardNew">
-  {{> adminAlert}}
-  {{#if adminTemplate admin_collection_name 'new'}}
-    {{#with adminTemplate admin_collection_name 'new'}}
-    {{> UI.dynamic template=name data=data }}
-    {{/with}}
-  {{else}}
-    {{> quickForm
-      id="admin_insert"
-      collection=admin_collection
-      fields=admin_fields
-      omitFields=admin_omit_fields
-      buttonContent=labelCreateBtn
-      template="bootstrap3-horizontal"
-      label-class="col-sm-2"
-      input-col-class="col-sm-10"
-      buttonClasses="btn-fixed btn btn-success"
-    }}
-  {{/if}}
+	{{> adminAlert}}
+	{{#if adminTemplate admin_collection_name 'new'}}
+		{{#with adminTemplate admin_collection_name 'new'}}
+		{{> Template.dynamic template=name data=data }}
+		{{/with}}
+	{{else}}
+		{{> quickForm
+			id="admin_insert"
+			type="insert"
+			collection=admin_collection
+			fields=admin_fields
+			omitFields=admin_omit_fields
+			buttonContent=labelCreateBtn
+			template="bootstrap3-horizontal"
+			label-class="col-sm-2"
+			input-col-class="col-sm-10"
+			buttonClasses="btn-fixed btn btn-success"
+		}}
+	{{/if}}
 </template>
 
 <template name="AdminDashboardEdit">
-  {{> adminAlert}}
-  {{#if adminTemplate admin_collection_name 'edit'}}
-    {{#with adminTemplate admin_collection_name 'edit'}}
-    {{> UI.dynamic template=name data=data }}
-    {{/with}}
-  {{else}}
-    {{#if admin_current_doc}}
-      {{> quickForm
-        id="admin_update"
-        collection=admin_collection
-        doc=admin_current_doc
-        fields=admin_fields
-        omitFields=admin_omit_fields
-        buttonContent=labelUpdateBtn
-        template="bootstrap3-horizontal"
-        label-class="col-sm-2"
-        input-col-class="col-sm-10"
-        buttonClasses="btn-fixed btn btn-success"
-      }}
-    {{/if}}
-  {{/if}}
+	{{> adminAlert}}
+	{{#if adminTemplate admin_collection_name 'edit'}}
+		{{#with adminTemplate admin_collection_name 'edit'}}
+		{{> Template.dynamic template=name data=data }}
+		{{/with}}
+	{{else}}
+		{{#if admin_current_doc}}
+			{{> quickForm
+				id="admin_update"
+				type="update"
+				collection=admin_collection
+				doc=admin_current_doc
+				fields=admin_fields
+				omitFields=admin_omit_fields
+				buttonContent=labelUpdateBtn
+				template="bootstrap3-horizontal"
+				label-class="col-sm-2"
+				input-col-class="col-sm-10"
+				buttonClasses="btn-fixed btn btn-success"
+			}}
+		{{/if}}
+	{{/if}}
 </template>
 
 <template name="AdminDashboardViewWrapper">
-  <div></div>
-  {{! This template is used to manually re-render AdminDashboardView on route transition }}
+	<div></div>
+	{{! This template is used to manually re-render AdminDashboardView on route transition }}
 </template>
 
 <template name="AdminDashboardView">
-  {{> adminAlert}}
-  {{#if adminTemplate admin_collection_name 'view'}}
-    {{#with adminTemplate admin_collection_name 'view'}}
-    {{> UI.dynamic template=name data=data }}
-    {{/with}}
-  {{else}}
-    {{#if hasDocuments}}
-      {{#if admin_table}}
-        {{> tabular table=admin_table class="table dataTable"}}
-      {{/if}}
-    {{else}}
-      <div class="alert alert-info">
-        <p>{{_ "noItems"}}</p>
-        <p><a href="{{pathFor 'adminDashboardNew' collection=admin_collection_name}}" class="btn btn-primary"><i class="fa fa-plus"></i> {{_ 'addOne'}}</a></p>
-      </div>
-    {{/if}}
-  {{/if}}
+	{{> adminAlert}}
+	{{#if adminTemplate admin_collection_name 'view'}}
+		{{#with adminTemplate admin_collection_name 'view'}}
+		{{> Template.dynamic template=name data=data }}
+		{{/with}}
+	{{else}}
+		{{#if hasDocuments}}
+			{{#if admin_table}}
+				{{> tabular table=admin_table class="table dataTable"}}
+			{{/if}}
+		{{else}}
+			<div class="alert alert-info">
+				<p>{{_ "noItems"}}</p>
+				<p><a href="{{pathFor 'adminDashboardNew' collection=admin_collection_name}}" class="btn btn-primary"><i class="fa fa-plus"></i> {{_ 'addOne'}}</a></p>
+			</div>
+		{{/if}}
+	{{/if}}
 </template>
 
 <template name="AdminDashboardUsersNew">
-  {{> adminAlert}}
-  {{# autoForm id="adminNewUser" schema=AdminSchemas.newUser type="method" meteormethod="adminNewUser"}}
+	{{> adminAlert}}
+	{{# autoForm id="adminNewUser" schema=AdminSchemas.newUser type="method" meteormethod="adminNewUser"}}
 
-  {{>afQuickField name="email"}}
-  {{>afQuickField name="chooseOwnPassword"}}
+	{{>afQuickField name="email"}}
+	{{>afQuickField name="chooseOwnPassword"}}
 
-  {{#if afFieldValueIs name="chooseOwnPassword" value=false}}
+	{{#if afFieldValueIs name="chooseOwnPassword" value=false}}
 
-  {{>afQuickField name="password"}}
-  {{>afQuickField name="sendPassword"}}
+	{{>afQuickField name="password"}}
+	{{>afQuickField name="sendPassword"}}
 
-  {{/if}}
+	{{/if}}
 
-  <button type="submit" class="btn btn-primary">{{_ 'user.add'}}</button>
+	<button type="submit" class="btn btn-primary">{{_ 'user.add'}}</button>
 
-  {{/autoForm}}
+	{{/autoForm}}
 
 </template>
 
 <template name="AdminDashboardUsersEdit">
-  {{> adminAlert}}
-  {{#if adminUserSchemaExists}}
-  {{> quickForm id="adminUpdateUser" buttonContent=labelUpdateBtn buttonClasses="btn btn-primary btn-sm" collection=adminGetUsers doc=admin_current_doc omitFields="roles,services"}}
-  <hr/>
-  {{/if}}
+	{{> adminAlert}}
+	{{#if adminUserSchemaExists}}
+	{{> quickForm id="adminUpdateUser" buttonContent=labelUpdateBtn buttonClasses="btn btn-primary btn-sm" collection=adminGetUsers schema=adminGetUserSchema doc=admin_current_doc omitFields="roles,services"}}
+	<hr/>
+	{{/if}}
 
-  <h4>{{_ 'user.roles'}}</h4>
-  {{#each roles}}
-  <button class="btn btn-primary btn-xs btn-remove-role" role="{{this}}" user="{{admin_current_id}}">{{this}}</button>
-  {{/each}}
-  {{#each otherRoles}}
-  <button class="btn btn-default btn-xs btn-add-role" role="{{this}}" user="{{admin_current_id}}">{{this}}</button>
-  {{/each}}
-  {{#if roles}}
-  <p style="margin-top:5px;">{{_ 'user.toggleRole'}}</p>
-  {{else}}
-  <p>{{_ 'user.noRoles'}}</p>
-  {{/if}}
+	<h4>{{_ 'user.roles'}}</h4>
+	{{#each roles}}
+	<button class="btn btn-primary btn-xs btn-remove-role" role="{{this}}" user="{{admin_current_id}}">{{this}}</button>
+	{{/each}}
+	{{#each otherRoles}}
+	<button class="btn btn-default btn-xs btn-add-role" role="{{this}}" user="{{admin_current_id}}">{{this}}</button>
+	{{/each}}
+	{{#if roles}}
+	<p style="margin-top:5px;">{{_ 'user.toggleRole'}}</p>
+	{{else}}
+	<p>{{_ 'user.noRoles'}}</p>
+	{{/if}}
 
-  <hr/>
-  <h4>{{_ 'user.resetPwd'}}</h4>
-  {{#autoForm id="adminSendResetPasswordEmail" schema=AdminSchemas.sendResetPasswordEmail type="method" meteormethod="adminSendResetPasswordEmail"}}
-  <div class="form-group hidden">
-    <label class="control-label" for="title">ID</label>
-    <input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off" />
-    <span class="help-block"></span>
-  </div>
-  <p>{{_ 'user.sendResetEmailLabel'}} {{admin_current_doc.emails.[0].address}}</p>
-  <button type="submit" class="btn btn-primary btn-sm">{{_ 'user.sendEmail'}}</button>
-  {{/autoForm}}
+	<hr/>
+	<h4>{{_ 'user.resetPwd'}}</h4>
+	{{#autoForm id="adminSendResetPasswordEmail" schema=AdminSchemas.sendResetPasswordEmail type="method" meteormethod="adminSendResetPasswordEmail"}}
+	<div class="form-group hidden">
+		<label class="control-label" for="title">ID</label>
+		<input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off" />
+		<span class="help-block"></span>
+	</div>
+	<p>{{_ 'user.sendResetEmailLabel'}} {{admin_current_doc.emails.[0].address}}</p>
+	<button type="submit" class="btn btn-primary btn-sm">{{_ 'user.sendEmail'}}</button>
+	{{/autoForm}}
 
-  <hr/>
-  <h4>{{_ 'user.changePwd'}}</h4>
-  {{#autoForm id="adminChangePassword" schema=AdminSchemas.changePassword type="method" meteormethod="adminChangePassword"}}
-  <div class="form-group hidden">
-    <label class="control-label" for="title">ID</label>
-    <input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off" />
-    <span class="help-block"></span>
-  </div>
-  {{>afQuickField name="password"}}
-  <button type="submit" class="btn btn-primary btn-sm">{{_ 'user.changePwd'}}</button>
-  {{/autoForm}}
+	<hr/>
+	<h4>{{_ 'user.changePwd'}}</h4>
+	{{#autoForm id="adminChangePassword" schema=AdminSchemas.changePassword type="method" meteormethod="adminChangePassword"}}
+	<div class="form-group hidden">
+		<label class="control-label" for="title">ID</label>
+		<input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off" />
+		<span class="help-block"></span>
+	</div>
+	{{>afQuickField name="password"}}
+	<button type="submit" class="btn btn-primary btn-sm">{{_ 'user.changePwd'}}</button>
+	{{/autoForm}}
 </template>
 
 <template name="adminAlert">
-  {{#if $.Session.get 'adminSuccess'}}
-  <div class="alert alert-success admin-alert">
-    {{$.Session.get 'adminSuccess'}}
-  </div>
-  {{/if}}
+	{{#if $.Session.get 'adminSuccess'}}
+	<div class="alert alert-success admin-alert">
+		{{$.Session.get 'adminSuccess'}}
+	</div>
+	{{/if}}
 
-  {{#if $.Session.get 'adminError'}}
-  <div class="alert alert-danger admin-alert">
-    {{$.Session.get 'adminError'}}
-  </div>
-  {{/if}}
+	{{#if $.Session.get 'adminError'}}
+	<div class="alert alert-danger admin-alert">
+		{{$.Session.get 'adminError'}}
+	</div>
+	{{/if}}
 </template>
 
 <template name="adminUsersIsAdmin">
-  {{#if adminIsUserInRole this._id 'admin'}}<i class="fa fa-check"></i>{{/if}}
+	{{#if adminIsUserInRole this._id 'admin'}}<i class="fa fa-check"></i>{{/if}}
 </template>
 
 <template name="adminUsersMailBtn">
-  <a href="mailto:{{adminUserEmail this}}" class="btn btn-default btn-xs"><i class="fa fa-envelope"></i></a>
+	<a href="mailto:{{adminUserEmail this}}" class="btn btn-default btn-xs"><i class="fa fa-envelope"></i></a>
 </template>
 
 <template name="adminEditBtn">
-  <a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
-  <a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> {{_ 'btns.edit'}}</a>
+	<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
+	<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> {{_ 'btns.edit'}}</a>
 </template>
 
 <template name="adminDeleteBtn">
-  <a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>
-  <a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i> {{_ 'btns.delete'}}</a>
+	<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>
+	<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i> {{_ 'btns.delete'}}</a>
 </template>
