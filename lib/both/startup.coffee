@@ -10,14 +10,14 @@ adminEditDelButtons = ->
 		data: '_id'
 		title: getI18nLabel 'btns.update'
 		createdCell: (node, cellData, rowData) ->
-			$(node).html(Blaze.toHTMLWithData Template.adminEditBtn, {_id: cellData}, node)
+			$(node).html(Blaze.toHTMLWithData Template.adminEditBtn, {_id: cellData})
 		width: '40px'
 		orderable: false
 	,
 		data: '_id'
 		title: getI18nLabel 'btns.delete'
 		createdCell: (node, cellData, rowData) ->
-			$(node).html(Blaze.toHTMLWithData Template.adminDeleteBtn, {_id: cellData}, node)
+			$(node).html(Blaze.toHTMLWithData Template.adminDeleteBtn, {_id: cellData})
 		width: '40px'
 		orderable: false
 	]
@@ -31,7 +31,7 @@ adminCreateUserTable = ->
 				title: getI18nLabel 'adminUser'
 				# TODO: use `tmpl`
 				createdCell: (node, cellData, rowData) ->
-					$(node).html(Blaze.toHTMLWithData Template.adminUsersIsAdmin, {_id: cellData}, node)
+					$(node).html(Blaze.toHTMLWithData Template.adminUsersIsAdmin, {_id: cellData})
 				width: '40px'
 				orderable: false
 			,
@@ -44,7 +44,7 @@ adminCreateUserTable = ->
 				title: getI18nLabel 'user.mail'
 				# TODO: use `tmpl`
 				createdCell: (node, cellData, rowData) ->
-					$(node).html(Blaze.toHTMLWithData Template.adminUsersMailBtn, {emails: cellData}, node)
+					$(node).html(Blaze.toHTMLWithData Template.adminUsersMailBtn, {emails: cellData})
 				width: '40px'
 			,
 				data: 'createdAt'
